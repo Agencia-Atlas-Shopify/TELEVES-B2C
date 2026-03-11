@@ -21,6 +21,7 @@
 
 {%- comment -%} Background images that need Liquid asset_url {%- endcomment -%}
 <style>
+  .tv-step--1 .tv-step__tail { background-image: url('{{ 'tv-steps-cola-uno.svg' | asset_url }}'); }
   .tv-step--1 .tv-step__tip { background-image: url('{{ 'tv-steps-punta.svg' | asset_url }}'); }
   .tv-step--2 .tv-step__tail { background-image: url('{{ 'tv-steps-cola-dos.svg' | asset_url }}'); }
   .tv-step--2 .tv-step__tip { background-image: url('{{ 'tv-steps-punta.svg' | asset_url }}'); }
@@ -247,9 +248,9 @@
     border-radius: 0 6px 6px 0;
   }
 
-  /* ---- Step 1 body width (matching inline style from reference) ---- */
+  /* ---- Step 1 body width (subtract tail 64px + tip 44px) ---- */
   .tv-step--1 .tv-step__body {
-    width: calc(100% - 64px);
+    width: calc(100% - 64px - 44px);
   }
 
   /* ---- Step content ---- */
@@ -360,7 +361,10 @@
   }
 
   .tv-step--1 .tv-step__tail {
-    display: none;
+    width: 64px;
+    height: 100%;
+    background-position-x: left;
+    border-radius: 6px 0 0 6px;
   }
 
   .tv-step--2 .tv-step__tail {
@@ -445,9 +449,17 @@
     }
 
     /* Step 1 mobile */
+    .tv-step--1 .tv-step__tail {
+      width: 64px;
+      height: 100%;
+      min-height: 146px;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
     .tv-step--1 .tv-step__body {
       border-radius: 0 6px 0 0;
-      width: 100%;
+      width: calc(100% - 64px);
     }
 
     .tv-step--1 .tv-step__tip {
