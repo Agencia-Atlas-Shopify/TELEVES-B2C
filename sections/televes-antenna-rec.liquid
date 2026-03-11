@@ -11,6 +11,7 @@
   assign btn_text = section.settings.btn_text | default: 'Choose your antenna'
   assign bottom_text = section.settings.bottom_text | default: 'Or, call us for a FREE home signal analysis'
   assign form_action = section.settings.form_action
+  assign rec_page_url = section.settings.rec_page_url | default: '/pages/antenna-recommendation'
 -%}
 
 <style>
@@ -28,9 +29,9 @@
           <p class="tv-rec__desc">{{ description }}</p>
         </div>
         <label class="tv-rec__label">{{ label_text }}</label>
-        <form class="tv-rec__form" {% if form_action != blank %}action="{{ form_action }}"{% endif %}>
+        <form class="tv-rec__form" id="tvRecForm_{{ section.id }}">
           <div class="tv-rec__search">
-            <input type="text" name="prediction-address" value="" placeholder="{{ input_placeholder }}" class="tv-rec__input" autocomplete="off">
+            <input type="text" name="prediction-address" value="" placeholder="{{ input_placeholder }}" class="tv-rec__input" id="tvRecInput_{{ section.id }}" autocomplete="off">
             <input type="submit" class="tv-rec__submit" value="{{ btn_text }}">
           </div>
         </form>
@@ -41,6 +42,22 @@
     </div>
   </div>
 </section>
+
+<script>
+(function() {
+  var form = document.getElementById('tvRecForm_{{ section.id }}');
+  var input = document.getElementById('tvRecInput_{{ section.id }}');
+  var recPageUrl = '{{ rec_page_url }}';
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var address = input.value.trim();
+    if (!address) return;
+    /* Navigate to recommendation page with address as query param */
+    window.location.href = recPageUrl + '?address=' + encodeURIComponent(address);
+  });
+})();
+</script>
 
 {% stylesheet %}
 /* ===== Antenna Recommendation Section ===== */
@@ -321,7 +338,14 @@
     {
       "type": "url",
       "id": "form_action",
-      "label": "Form action URL"
+      "label": "Form action URL (legacy)"
+    },
+    {
+      "type": "text",
+      "id": "rec_page_url",
+      "label": "Recommendation page URL",
+      "default": "/pages/antenna-recommendation",
+      "info": "URL of the page using the 'antenna-recommendation' template"
     }
   ],
   "presets": [

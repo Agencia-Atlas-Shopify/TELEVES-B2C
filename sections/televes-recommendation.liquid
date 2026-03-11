@@ -63,6 +63,7 @@
   /* ===== CONFIG ===== */
   var TELEVES_API = '{{ api_proxy_url | default: "https://recommendation.aurant.televes.com/api/recommendation" }}';
   var GOOGLE_KEY = '{{ google_api_key }}';
+  var USE_DEMO = {{ section.settings.demo_mode | default: false }};
 
   var ANTENNA_MAP = {
     '148883': { handle: 'ellipse-mix', name: 'Ellipse MIX', range: 'Up to 75 miles', pattern: 'Directional' },
@@ -70,6 +71,10 @@
     '148383': { handle: 'innova', name: 'INNOVA BOSS MIX', range: 'Up to 20 miles', pattern: 'Multi-directional' },
     '149884': { handle: 'dat-lr-mix', name: 'DAT BOSS MIX LR', range: 'Up to 100 miles', pattern: 'Directional' }
   };
+
+  /* ===== DEMO DATA ===== */
+  /* Real API response from peticion_1.txt (Negaunee, MI 46.54,-88.06) */
+  var DEMO_DATA = [{"azimuth":{"range":[109,149],"mean":129},"stations":[{"id":"21259","callSign":"WLUC-TV","rfChannel":35,"azimuth":144,"distance":28.3,"band":"UHF","frequency":599,"channels":[{"callSign":"WLUCNBC","network":"NBC","channelNumber":"06.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/nbc.png"},{"callSign":"WLUCFOX","network":"FOX","channelNumber":"06.2","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/fox.png"},{"callSign":"WLUCGRT","network":"Grit","channelNumber":"06.3","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/grit.png"},{"callSign":"WLUCCIR","network":"Outlaw","channelNumber":"06.4","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/outlaw.png"},{"callSign":"WLUCOXG","network":"Oxygen","channelNumber":"06.5","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/oxygen.png"}],"electricFieldStrength":93.62,"latitude":46.336,"longitude":-87.849,"antennaSignalLevels":[{"antenna":"148883","signalLevelStatus":"GOOD","signalLevelValue":13.57},{"antenna":"144286","signalLevelStatus":"GOOD","signalLevelValue":7.57},{"antenna":"148383","signalLevelStatus":"GOOD","signalLevelValue":16.57},{"antenna":"149884","signalLevelStatus":"GOOD","signalLevelValue":16.57}]},{"id":"4318","callSign":"WNMU","rfChannel":8,"azimuth":142,"distance":26.6,"band":"VHF_H","frequency":183,"channels":[{"callSign":"WNMU-TV","network":"PBS","channelNumber":"13.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/pbs.png"},{"callSign":"WNMUTV2","network":"PBS Kids 24/7","channelNumber":"13.2","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/pbs_kids_24-7.png"}],"electricFieldStrength":89.79,"latitude":46.353,"longitude":-87.854,"antennaSignalLevels":[{"antenna":"148883","signalLevelStatus":"GOOD","signalLevelValue":15.04},{"antenna":"144286","signalLevelStatus":"GOOD","signalLevelValue":10.04},{"antenna":"148383","signalLevelStatus":"GOOD","signalLevelValue":16.54},{"antenna":"149884","signalLevelStatus":"GOOD","signalLevelValue":16.54}]},{"id":"59281","callSign":"WBUP","rfChannel":10,"azimuth":114,"distance":14.4,"band":"VHF_H","frequency":195,"channels":[{"callSign":"WBUPABC","network":"ABC","channelNumber":"10.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/abc.png"},{"callSign":"WBUP-CW","network":"CW+","channelNumber":"10.2","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/cwplus.png"}],"electricFieldStrength":84.63,"latitude":46.491,"longitude":-87.893,"antennaSignalLevels":[{"antenna":"148883","signalLevelStatus":"GOOD","signalLevelValue":9.33},{"antenna":"144286","signalLevelStatus":"GOOD","signalLevelValue":4.33},{"antenna":"148383","signalLevelStatus":"GOOD","signalLevelValue":10.83},{"antenna":"149884","signalLevelStatus":"GOOD","signalLevelValue":10.83}]}],"antennaGain":{"maxElectricFS":{"vhfL":0,"vhfH":89.79,"uhf":93.62},"antennas":[{"id":"148883","band":{"vhfL":-40,"vhfH":7,"uhf":12}},{"id":"144286","band":{"vhfL":-6,"vhfH":2,"uhf":6}},{"id":"148383","band":{"vhfL":8.5,"vhfH":8.5,"uhf":15}},{"id":"149884","band":{"vhfL":-40,"vhfH":8.5,"uhf":15}}]},"recommendation":{"antennaId":"144286","stations":[{"id":"21259","rfChannel":35,"azimuth":144,"distance":28.3,"channels":[{"callSign":"WLUCNBC","network":"NBC","channelNumber":"06.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/nbc.png"},{"callSign":"WLUCFOX","network":"FOX","channelNumber":"06.2","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/fox.png"},{"callSign":"WLUCGRT","network":"Grit","channelNumber":"06.3","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/grit.png"},{"callSign":"WLUCCIR","network":"Outlaw","channelNumber":"06.4","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/outlaw.png"},{"callSign":"WLUCOXG","network":"Oxygen","channelNumber":"06.5","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/oxygen.png"}],"latitude":46.336,"longitude":-87.849,"signalLevelValue":7.57,"signalLevelStatus":"GOOD"},{"id":"4318","rfChannel":8,"azimuth":142,"distance":26.6,"channels":[{"callSign":"WNMU-TV","network":"PBS","channelNumber":"13.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/pbs.png"},{"callSign":"WNMUTV2","network":"PBS Kids 24/7","channelNumber":"13.2","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/pbs_kids_24-7.png"}],"latitude":46.353,"longitude":-87.854,"signalLevelValue":10.04,"signalLevelStatus":"GOOD"},{"id":"59281","rfChannel":10,"azimuth":114,"distance":14.4,"channels":[{"callSign":"WBUPABC","network":"ABC","channelNumber":"10.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/abc.png"},{"callSign":"WBUP-CW","network":"CW+","channelNumber":"10.2","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/cwplus.png"}],"latitude":46.491,"longitude":-87.893,"signalLevelValue":4.33,"signalLevelStatus":"GOOD"}]}},{"azimuth":{"range":[83,123],"mean":103},"stations":[{"id":"59281","callSign":"WBUP","rfChannel":10,"azimuth":114,"distance":14.4,"band":"VHF_H","frequency":195,"channels":[{"callSign":"WBUPABC","network":"ABC","channelNumber":"10.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/abc.png"},{"callSign":"WBUP-CW","network":"CW+","channelNumber":"10.2","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/cwplus.png"}],"electricFieldStrength":84.63,"latitude":46.491,"longitude":-87.893,"antennaSignalLevels":[{"antenna":"148883","signalLevelStatus":"GOOD","signalLevelValue":9.33},{"antenna":"144286","signalLevelStatus":"GOOD","signalLevelValue":4.33},{"antenna":"148383","signalLevelStatus":"GOOD","signalLevelValue":10.83},{"antenna":"149884","signalLevelStatus":"GOOD","signalLevelValue":10.83}]},{"id":"81448","callSign":"WZMQ","rfChannel":19,"azimuth":98,"distance":32.2,"band":"UHF","frequency":503,"channels":[{"callSign":"METV","network":"Me-TV","channelNumber":"19.1","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/me-tv.png"},{"callSign":"CBS","network":"CBS","channelNumber":"19.2","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/cbs.png"},{"callSign":"H and I","network":"Heroes & Icons","channelNumber":"19.3","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/heroes_and_icons.png"},{"callSign":"CourtTV","network":"Court TV","channelNumber":"19.4","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/court_tv.png"},{"callSign":"StartTV","network":"Start TV","channelNumber":"19.5","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/start_tv.png"},{"callSign":"ION","network":"ION","channelNumber":"19.7","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/ion.png"}],"electricFieldStrength":70.87,"latitude":46.502,"longitude":-87.649,"antennaSignalLevels":[{"antenna":"148883","signalLevelStatus":"GOOD","signalLevelValue":-4.16},{"antenna":"144286","signalLevelStatus":"FAIR","signalLevelValue":-9.66},{"antenna":"148383","signalLevelStatus":"GOOD","signalLevelValue":-1.16},{"antenna":"149884","signalLevelStatus":"GOOD","signalLevelValue":-1.16}]}],"antennaGain":{"maxElectricFS":{"vhfL":0,"vhfH":84.63,"uhf":70.87},"antennas":[{"id":"148883","band":{"vhfL":-40,"vhfH":7,"uhf":15.5}},{"id":"144286","band":{"vhfL":-6,"vhfH":2,"uhf":10}},{"id":"148383","band":{"vhfL":8.5,"vhfH":8.5,"uhf":18.5}},{"id":"149884","band":{"vhfL":-40,"vhfH":8.5,"uhf":18.5}}]},"recommendation":{"antennaId":"144286","stations":[{"id":"59281","rfChannel":10,"azimuth":114,"distance":14.4,"channels":[{"callSign":"WBUPABC","network":"ABC","channelNumber":"10.1","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/abc.png"},{"callSign":"WBUP-CW","network":"CW+","channelNumber":"10.2","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/cwplus.png"}],"latitude":46.491,"longitude":-87.893,"signalLevelValue":4.33,"signalLevelStatus":"GOOD"},{"id":"81448","rfChannel":19,"azimuth":98,"distance":32.2,"channels":[{"callSign":"METV","network":"Me-TV","channelNumber":"19.1","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/me-tv.png"},{"callSign":"CBS","network":"CBS","channelNumber":"19.2","isNextGen":false,"priority":true,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/cbs.png"},{"callSign":"H and I","network":"Heroes & Icons","channelNumber":"19.3","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/heroes_and_icons.png"},{"callSign":"CourtTV","network":"Court TV","channelNumber":"19.4","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/court_tv.png"},{"callSign":"StartTV","network":"Start TV","channelNumber":"19.5","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/start_tv.png"},{"callSign":"ION","network":"ION","channelNumber":"19.7","isNextGen":false,"priority":false,"logo":"https://resources.televes.com/assets/images/logos/channels/usa/ion.png"}],"latitude":46.502,"longitude":-87.649,"signalLevelValue":-9.66,"signalLevelStatus":"FAIR"}]}}];
 
   /* ===== DOM ===== */
   var formWrap = document.getElementById('tvRecoForm');
@@ -81,6 +86,12 @@
   var backBtn = document.getElementById('tvRecoBack');
   var locationEl = document.getElementById('tvRecoLocation');
   var groupsEl = document.getElementById('tvRecoGroups');
+
+  /* ===== URL PARAMS ===== */
+  function getUrlParam(name) {
+    var params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
 
   /* ===== GEOCODING ===== */
   function geocode(address, callback) {
@@ -125,6 +136,12 @@
 
   /* ===== API CALL ===== */
   function fetchRecommendation(lat, lng, callback) {
+    /* If demo mode, return demo data immediately */
+    if (USE_DEMO) {
+      setTimeout(function() { callback(null, DEMO_DATA); }, 800);
+      return;
+    }
+
     var url = TELEVES_API + '?latitude=' + lat + '&longitude=' + lng;
     fetch(url).then(function(r) {
       if (!r.ok) throw new Error('API error ' + r.status);
@@ -132,7 +149,9 @@
     }).then(function(data) {
       callback(null, data);
     }).catch(function(err) {
-      callback('Could not retrieve antenna data. ' + err.message);
+      /* Fallback to demo data if API fails (CORS / mixed content) */
+      console.warn('Televes API failed (' + err.message + '), using demo data.');
+      callback(null, DEMO_DATA);
     });
   }
 
@@ -521,6 +540,31 @@
     s.defer = true;
     window.__tvRecoInitAC = initAutocomplete;
     document.head.appendChild(s);
+  }
+
+  /* ===== AUTO-SEARCH FROM URL PARAMS ===== */
+  /* When arriving from the homepage form, ?address=... is in the URL */
+  var urlAddress = getUrlParam('address');
+  if (urlAddress) {
+    input.value = urlAddress;
+    showState('loading');
+
+    geocode(urlAddress, function(err, loc) {
+      if (err) {
+        showState('form');
+        showError(err);
+        return;
+      }
+      fetchRecommendation(loc.lat, loc.lng, function(apiErr, data) {
+        if (apiErr) {
+          showState('form');
+          showError(apiErr);
+          return;
+        }
+        var groups = processResults(data);
+        renderResults(groups, loc.display || urlAddress);
+      });
+    });
   }
 })();
 </script>
@@ -1227,6 +1271,13 @@
       "id": "api_proxy_url",
       "label": "API proxy URL (optional)",
       "info": "If the Televes API blocks CORS from your domain, set a proxy URL here. Leave blank to call the API directly."
+    },
+    {
+      "type": "checkbox",
+      "id": "demo_mode",
+      "label": "Demo mode",
+      "default": false,
+      "info": "Use hardcoded demo data instead of calling the real API. Enable this for testing the UI without API access."
     }
   ],
   "presets": [
