@@ -11,6 +11,47 @@
   "type": "header",
   "name": "Header",
   "sections": {
+    "pre_header": {
+      "type": "pre-header",
+      "blocks": {
+        "link_support": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Support",
+            "link": "/pages/support"
+          }
+        },
+        "link_about": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About us",
+            "link": "/pages/about-us"
+          }
+        },
+        "link_contact": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Contact us",
+            "link": "/pages/contact-us"
+          }
+        }
+      },
+      "block_order": [
+        "link_support",
+        "link_about",
+        "link_contact"
+      ],
+      "settings": {
+        "show_account_links": true,
+        "show_account_icon": true,
+        "login_label": "Log in",
+        "register_label": "Create account",
+        "account_label": "My Account",
+        "logout_label": "Log out",
+        "section_width": "page-width",
+        "color_scheme": "scheme-1"
+      }
+    },
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
@@ -112,6 +153,7 @@
     }
   },
   "order": [
+    "pre_header",
     "header_announcements_9jGBFp",
     "header_section"
   ]
