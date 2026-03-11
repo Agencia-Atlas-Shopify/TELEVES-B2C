@@ -1,0 +1,333 @@
+{%- comment -%}
+  Televes "Find Your Best Antenna" Recommendation Section
+  1:1 clone of store.televes.com
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading | default: 'FIND YOUR BEST ANTENNA'
+  assign description = section.settings.description | default: 'Use our free online recommendation antenna service if you are not sure what antenna is best for you.'
+  assign label_text = section.settings.label_text | default: 'Zip/Postal Code:'
+  assign input_placeholder = section.settings.input_placeholder | default: 'Enter your address'
+  assign btn_text = section.settings.btn_text | default: 'Choose your antenna'
+  assign bottom_text = section.settings.bottom_text | default: 'Or, call us for a FREE home signal analysis'
+  assign form_action = section.settings.form_action
+-%}
+
+<style>
+  .tv-rec {
+    background-image: url('{{ 'tv-antenna-rec-bg.svg' | asset_url }}');
+  }
+</style>
+
+<section class="tv-rec" id="tv-rec-{{ section.id }}">
+  <div class="tv-rec__container">
+    <div class="tv-rec__row">
+      <div class="tv-rec__col">
+        <h2 class="tv-rec__heading">{{ heading }}</h2>
+        <div class="tv-rec__desc-wrap">
+          <p class="tv-rec__desc">{{ description }}</p>
+        </div>
+        <label class="tv-rec__label">{{ label_text }}</label>
+        <form class="tv-rec__form" {% if form_action != blank %}action="{{ form_action }}"{% endif %}>
+          <div class="tv-rec__search">
+            <input type="text" name="prediction-address" value="" placeholder="{{ input_placeholder }}" class="tv-rec__input" autocomplete="off">
+            <input type="submit" class="tv-rec__submit" value="{{ btn_text }}">
+          </div>
+        </form>
+        <div class="tv-rec__bottom">
+          <p class="tv-rec__bottom-text">{{ bottom_text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+/* ===== Antenna Recommendation Section ===== */
+.tv-rec {
+  padding-top: 10px;
+  padding-bottom: 80px;
+  background-size: cover;
+  background-position-x: right;
+  background-position-y: center;
+  background-repeat: no-repeat;
+}
+
+.tv-rec__container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .tv-rec__container { max-width: 540px; }
+}
+@media (min-width: 768px) {
+  .tv-rec__container { max-width: 720px; }
+}
+@media (min-width: 992px) {
+  .tv-rec__container { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .tv-rec__container { max-width: 1200px; }
+}
+@media (min-width: 1420px) {
+  .tv-rec__container { max-width: 1400px; }
+}
+
+.tv-rec__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  position: relative;
+  z-index: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tv-rec__col {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-top: 100px;
+}
+
+@media (min-width: 768px) {
+  .tv-rec__col {
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+}
+
+@media (min-width: 992px) {
+  .tv-rec__col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Heading */
+.tv-rec__heading {
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+/* Description */
+.tv-rec__desc-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.tv-rec__desc {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 26px;
+  color: #333;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Label */
+.tv-rec__label {
+  display: block;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 600;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Form */
+.tv-rec__form {
+  margin: 0;
+}
+
+.tv-rec__search {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.tv-rec__input {
+  display: block;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #000;
+  min-width: 50%;
+  height: 40px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  padding: 0 9px;
+  color: #292929;
+  box-sizing: border-box;
+  outline: none;
+  flex: 1;
+}
+
+.tv-rec__input::placeholder {
+  color: #999;
+}
+
+.tv-rec__submit {
+  border: none;
+  padding: 8px 40px;
+  border-radius: 40px;
+  font-weight: 700;
+  color: #fff;
+  background: #f6a400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  cursor: pointer;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  height: 40px;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+
+.tv-rec__submit:hover {
+  background: #f6a400;
+  background: linear-gradient(0deg, rgba(51,51,51,1) 50%, rgba(246,164,0,1) 50%);
+  background-size: 200% 200%;
+  background-position-y: 0;
+  animation: tv-rec-grad .1s ease forwards;
+  color: #fff;
+}
+
+@keyframes tv-rec-grad {
+  to { background-position-y: 100%; }
+}
+
+/* Bottom text */
+.tv-rec__bottom {
+  margin-top: 20px;
+}
+
+.tv-rec__bottom-text {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  color: #666;
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+  .tv-rec {
+    background-position-x: 90%;
+  }
+}
+
+@media (max-width: 991px) {
+  .tv-rec {
+    background-position-x: 75%;
+  }
+}
+
+@media (max-width: 767px) {
+  .tv-rec {
+    background-position-x: 70%;
+  }
+  .tv-rec__submit {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tv-rec {
+    background-position-x: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  .tv-rec__desc,
+  .tv-rec__label {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media (max-width: 494px) {
+  .tv-rec__search {
+    flex-direction: column;
+  }
+  .tv-rec__submit {
+    margin-top: 30px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Televes Antenna Rec",
+  "tag": "section",
+  "class": "tv-section-antenna-rec",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FIND YOUR BEST ANTENNA"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Use our free online recommendation antenna service if you are not sure what antenna is best for you."
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "Input label",
+      "default": "Zip/Postal Code:"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your address"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "Choose your antenna"
+    },
+    {
+      "type": "text",
+      "id": "bottom_text",
+      "label": "Bottom text",
+      "default": "Or, call us for a FREE home signal analysis"
+    },
+    {
+      "type": "url",
+      "id": "form_action",
+      "label": "Form action URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Televes Antenna Rec"
+    }
+  ]
+}
+{% endschema %}
