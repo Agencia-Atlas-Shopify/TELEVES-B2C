@@ -145,12 +145,26 @@
         "area4_label": "countryside",
         "product4": ""
       }
+    },
+    "televes_recommendation_JzQafc": {
+      "type": "televes-recommendation",
+      "name": "Televes Recommendation",
+      "settings": {
+        "heading": "Find Your Best Antenna",
+        "description": "Enter your address or ZIP code and we will recommend the best antenna for your location.",
+        "input_placeholder": "Enter your address or ZIP code",
+        "btn_text": "Find my antenna",
+        "google_api_key": "",
+        "api_proxy_url": "",
+        "demo_mode": false
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "televes_steps_TzzafY",
     "televes_benefits_d8pgQm",
-    "televes_products_6VJKaM"
+    "televes_products_6VJKaM",
+    "televes_recommendation_JzQafc"
   ]
 }
