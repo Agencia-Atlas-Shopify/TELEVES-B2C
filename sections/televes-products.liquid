@@ -1,0 +1,681 @@
+{%- comment -%}
+  Televes "An antenna for every area" Products Section
+  1:1 clone of store.televes.com — products selectable from Shopify customizer
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading | default: 'An antenna for every area'
+
+  assign area1_label = section.settings.area1_label | default: 'indoor/urban'
+  assign area2_label = section.settings.area2_label | default: 'metro/suburban'
+  assign area3_label = section.settings.area3_label | default: 'towns/rural'
+  assign area4_label = section.settings.area4_label | default: 'countryside'
+
+  assign product1 = section.settings.product1
+  assign product2 = section.settings.product2
+  assign product3 = section.settings.product3
+  assign product4 = section.settings.product4
+
+  assign badge_text = section.settings.badge_text | default: '30-day refund'
+  assign badge_link = section.settings.badge_link | default: '/pages/return-conditions'
+-%}
+
+{%- comment -%} Background images that need Liquid asset_url {%- endcomment -%}
+<style>
+  .tv-prod__area--1 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-1.svg' | asset_url }}'); }
+  .tv-prod__area--2 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-2.svg' | asset_url }}'); }
+  .tv-prod__area--3 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-3.svg' | asset_url }}'); }
+  .tv-prod__area--4 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-4.svg' | asset_url }}'); }
+
+  @media (max-width: 900px) {
+    .tv-prod__area--1 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-1-tbl.svg' | asset_url }}'); }
+    .tv-prod__area--2 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-2-tbl.svg' | asset_url }}'); }
+    .tv-prod__area--3 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-3-tbl.svg' | asset_url }}'); }
+    .tv-prod__area--4 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-4-tbl.svg' | asset_url }}'); }
+  }
+
+  @media (max-width: 550px) {
+    .tv-prod__area--1 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-1-mvl.svg' | asset_url }}'); }
+    .tv-prod__area--2 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-2-mvl.svg' | asset_url }}'); }
+    .tv-prod__area--3 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-3-mvl.svg' | asset_url }}'); }
+    .tv-prod__area--4 .tv-prod__area-label { background-image: url('{{ 'tv-products-area-4-mvl.svg' | asset_url }}'); }
+  }
+</style>
+
+<section class="tv-prod">
+  <div class="tv-prod__wrapper">
+    <div class="tv-prod__header">
+      <div class="tv-prod__separator"></div>
+      <h2 class="tv-prod__title">{{ heading }}</h2>
+    </div>
+
+    <div class="tv-prod__grid">
+      {%- comment -%} ====== AREA 1 ====== {%- endcomment -%}
+      <div class="tv-prod__area tv-prod__area--1">
+        <div class="tv-prod__area-label">{{ area1_label }}</div>
+        <div class="tv-prod__card">
+          {%- if product1 != blank -%}
+            {%- assign p = product1 -%}
+            <div class="tv-prod__card-inner">
+              <div class="tv-prod__badge">
+                <a href="{{ badge_link }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor"><g transform="translate(0, 960) scale(1, -1)"><path d="M842.317 15.539l54.758 8.115c21.043 3.123 38.605 16.64 47.027 36.173 8.397 19.533 6.144 41.6-6.067 59.008l-85.632 122.317c24.858 16.794 40.397 45.005 40.448 76.16l0.128 79.206c0 4.378 1.382 8.55 3.942 12.083l46.669 64c23.603 32.358 23.68 75.904 0.179 108.339l-46.438 64.154c-2.56 3.533-3.917 7.731-3.917 12.109l0.128 79.206c0.077 40.038-25.472 75.315-63.539 87.757l-75.29 24.602c-4.147 1.357-7.706 3.942-10.291 7.501l-46.438 64.154c-23.475 32.435-64.87 45.978-102.989 33.664l-75.366-24.346c-4.173-1.357-8.576-1.331-12.723 0l-75.29 24.602c-38.067 12.442-79.488-0.947-103.091-33.306l-46.669-64c-2.586-3.533-6.144-6.118-10.317-7.45l-75.366-24.346c-38.118-12.314-63.77-47.488-63.821-87.526l-0.128-79.206c0-4.378-1.382-8.55-3.942-12.083l-46.669-64c-23.603-32.358-23.68-75.904-0.179-108.339l46.438-64.154c2.56-3.533 3.917-7.731 3.917-12.109l-0.128-79.206c-0.051-31.693 15.923-60.365 41.446-77.133l-85.888-122.675c-12.186-17.408-14.464-39.475-6.067-59.008s25.984-33.050 47.027-36.173l54.758-8.115 26.368-48.666c10.138-18.688 28.851-30.592 50.074-31.821 1.203-0.077 2.381-0.102 3.584-0.102 19.866 0 38.298 9.549 49.818 25.984l95.053 135.757c7.475 0.486 14.976 1.894 22.349 4.275l75.366 24.346c4.173 1.357 8.55 1.331 12.723 0l75.29-24.602c7.987-2.611 16.102-4.070 24.166-4.48l94.72-135.296c11.52-16.435 29.926-25.984 49.818-25.984 1.178 0 2.381 0.026 3.584 0.102 21.222 1.229 39.962 13.107 50.074 31.821l26.368 48.666z"/></g></svg>
+                  <strong>{{ badge_text }}</strong>
+                </a>
+              </div>
+              <a href="{{ p.url }}" class="tv-prod__img-link">
+                <div class="tv-prod__img-wrap">
+                  {%- if p.featured_image != blank -%}
+                    <img src="{{ p.featured_image | image_url: width: 400 }}" alt="{{ p.featured_image.alt | escape }}" width="400" height="400" loading="lazy">
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="tv-prod__info">
+                <a href="{{ p.url }}" class="tv-prod__name-link">
+                  <div class="tv-prod__name">{{ p.title }}</div>
+                </a>
+                <div class="tv-prod__description">{{ p.description | strip_html | truncate: 120 }}</div>
+                {%- if p.metafields.custom.specs != blank -%}
+                  <div class="tv-prod__specs">{{ p.metafields.custom.specs }}</div>
+                {%- endif -%}
+                <div class="tv-prod__price-row">
+                  <div class="tv-prod__price">{{ p.price | money }}</div>
+                </div>
+                <div class="tv-prod__actions">
+                  <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="tv-prod__add-btn">
+                      <span>Add to Cart</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="tv-prod__card-inner tv-prod__card-inner--empty">
+              <p class="tv-prod__empty">Select a product in the theme customizer</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ====== AREA 2 ====== {%- endcomment -%}
+      <div class="tv-prod__area tv-prod__area--2">
+        <div class="tv-prod__area-label">{{ area2_label }}</div>
+        <div class="tv-prod__card">
+          {%- if product2 != blank -%}
+            {%- assign p = product2 -%}
+            <div class="tv-prod__card-inner">
+              <div class="tv-prod__badge">
+                <a href="{{ badge_link }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor"><g transform="translate(0, 960) scale(1, -1)"><path d="M842.317 15.539l54.758 8.115c21.043 3.123 38.605 16.64 47.027 36.173 8.397 19.533 6.144 41.6-6.067 59.008l-85.632 122.317c24.858 16.794 40.397 45.005 40.448 76.16l0.128 79.206c0 4.378 1.382 8.55 3.942 12.083l46.669 64c23.603 32.358 23.68 75.904 0.179 108.339l-46.438 64.154c-2.56 3.533-3.917 7.731-3.917 12.109l0.128 79.206c0.077 40.038-25.472 75.315-63.539 87.757l-75.29 24.602c-4.147 1.357-7.706 3.942-10.291 7.501l-46.438 64.154c-23.475 32.435-64.87 45.978-102.989 33.664l-75.366-24.346c-4.173-1.357-8.576-1.331-12.723 0l-75.29 24.602c-38.067 12.442-79.488-0.947-103.091-33.306l-46.669-64c-2.586-3.533-6.144-6.118-10.317-7.45l-75.366-24.346c-38.118-12.314-63.77-47.488-63.821-87.526l-0.128-79.206c0-4.378-1.382-8.55-3.942-12.083l-46.669-64c-23.603-32.358-23.68-75.904-0.179-108.339l46.438-64.154c2.56-3.533 3.917-7.731 3.917-12.109l-0.128-79.206c-0.051-31.693 15.923-60.365 41.446-77.133l-85.888-122.675c-12.186-17.408-14.464-39.475-6.067-59.008s25.984-33.050 47.027-36.173l54.758-8.115 26.368-48.666c10.138-18.688 28.851-30.592 50.074-31.821 1.203-0.077 2.381-0.102 3.584-0.102 19.866 0 38.298 9.549 49.818 25.984l95.053 135.757c7.475 0.486 14.976 1.894 22.349 4.275l75.366 24.346c4.173 1.357 8.55 1.331 12.723 0l75.29-24.602c7.987-2.611 16.102-4.070 24.166-4.48l94.72-135.296c11.52-16.435 29.926-25.984 49.818-25.984 1.178 0 2.381 0.026 3.584 0.102 21.222 1.229 39.962 13.107 50.074 31.821l26.368 48.666z"/></g></svg>
+                  <strong>{{ badge_text }}</strong>
+                </a>
+              </div>
+              <a href="{{ p.url }}" class="tv-prod__img-link">
+                <div class="tv-prod__img-wrap">
+                  {%- if p.featured_image != blank -%}
+                    <img src="{{ p.featured_image | image_url: width: 400 }}" alt="{{ p.featured_image.alt | escape }}" width="400" height="400" loading="lazy">
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="tv-prod__info">
+                <a href="{{ p.url }}" class="tv-prod__name-link">
+                  <div class="tv-prod__name">{{ p.title }}</div>
+                </a>
+                <div class="tv-prod__description">{{ p.description | strip_html | truncate: 120 }}</div>
+                {%- if p.metafields.custom.specs != blank -%}
+                  <div class="tv-prod__specs">{{ p.metafields.custom.specs }}</div>
+                {%- endif -%}
+                <div class="tv-prod__price-row">
+                  <div class="tv-prod__price">{{ p.price | money }}</div>
+                </div>
+                <div class="tv-prod__actions">
+                  <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="tv-prod__add-btn">
+                      <span>Add to Cart</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="tv-prod__card-inner tv-prod__card-inner--empty">
+              <p class="tv-prod__empty">Select a product in the theme customizer</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ====== AREA 3 ====== {%- endcomment -%}
+      <div class="tv-prod__area tv-prod__area--3">
+        <div class="tv-prod__area-label">{{ area3_label }}</div>
+        <div class="tv-prod__card">
+          {%- if product3 != blank -%}
+            {%- assign p = product3 -%}
+            <div class="tv-prod__card-inner">
+              <div class="tv-prod__badge">
+                <a href="{{ badge_link }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor"><g transform="translate(0, 960) scale(1, -1)"><path d="M842.317 15.539l54.758 8.115c21.043 3.123 38.605 16.64 47.027 36.173 8.397 19.533 6.144 41.6-6.067 59.008l-85.632 122.317c24.858 16.794 40.397 45.005 40.448 76.16l0.128 79.206c0 4.378 1.382 8.55 3.942 12.083l46.669 64c23.603 32.358 23.68 75.904 0.179 108.339l-46.438 64.154c-2.56 3.533-3.917 7.731-3.917 12.109l0.128 79.206c0.077 40.038-25.472 75.315-63.539 87.757l-75.29 24.602c-4.147 1.357-7.706 3.942-10.291 7.501l-46.438 64.154c-23.475 32.435-64.87 45.978-102.989 33.664l-75.366-24.346c-4.173-1.357-8.576-1.331-12.723 0l-75.29 24.602c-38.067 12.442-79.488-0.947-103.091-33.306l-46.669-64c-2.586-3.533-6.144-6.118-10.317-7.45l-75.366-24.346c-38.118-12.314-63.77-47.488-63.821-87.526l-0.128-79.206c0-4.378-1.382-8.55-3.942-12.083l-46.669-64c-23.603-32.358-23.68-75.904-0.179-108.339l46.438-64.154c2.56-3.533 3.917-7.731 3.917-12.109l-0.128-79.206c-0.051-31.693 15.923-60.365 41.446-77.133l-85.888-122.675c-12.186-17.408-14.464-39.475-6.067-59.008s25.984-33.050 47.027-36.173l54.758-8.115 26.368-48.666c10.138-18.688 28.851-30.592 50.074-31.821 1.203-0.077 2.381-0.102 3.584-0.102 19.866 0 38.298 9.549 49.818 25.984l95.053 135.757c7.475 0.486 14.976 1.894 22.349 4.275l75.366 24.346c4.173 1.357 8.55 1.331 12.723 0l75.29-24.602c7.987-2.611 16.102-4.070 24.166-4.48l94.72-135.296c11.52-16.435 29.926-25.984 49.818-25.984 1.178 0 2.381 0.026 3.584 0.102 21.222 1.229 39.962 13.107 50.074 31.821l26.368 48.666z"/></g></svg>
+                  <strong>{{ badge_text }}</strong>
+                </a>
+              </div>
+              <a href="{{ p.url }}" class="tv-prod__img-link">
+                <div class="tv-prod__img-wrap">
+                  {%- if p.featured_image != blank -%}
+                    <img src="{{ p.featured_image | image_url: width: 400 }}" alt="{{ p.featured_image.alt | escape }}" width="400" height="400" loading="lazy">
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="tv-prod__info">
+                <a href="{{ p.url }}" class="tv-prod__name-link">
+                  <div class="tv-prod__name">{{ p.title }}</div>
+                </a>
+                <div class="tv-prod__description">{{ p.description | strip_html | truncate: 120 }}</div>
+                {%- if p.metafields.custom.specs != blank -%}
+                  <div class="tv-prod__specs">{{ p.metafields.custom.specs }}</div>
+                {%- endif -%}
+                <div class="tv-prod__price-row">
+                  <div class="tv-prod__price">{{ p.price | money }}</div>
+                </div>
+                <div class="tv-prod__actions">
+                  <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="tv-prod__add-btn">
+                      <span>Add to Cart</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="tv-prod__card-inner tv-prod__card-inner--empty">
+              <p class="tv-prod__empty">Select a product in the theme customizer</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ====== AREA 4 ====== {%- endcomment -%}
+      <div class="tv-prod__area tv-prod__area--4">
+        <div class="tv-prod__area-label">{{ area4_label }}</div>
+        <div class="tv-prod__card">
+          {%- if product4 != blank -%}
+            {%- assign p = product4 -%}
+            <div class="tv-prod__card-inner">
+              <div class="tv-prod__badge">
+                <a href="{{ badge_link }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18" fill="currentColor"><g transform="translate(0, 960) scale(1, -1)"><path d="M842.317 15.539l54.758 8.115c21.043 3.123 38.605 16.64 47.027 36.173 8.397 19.533 6.144 41.6-6.067 59.008l-85.632 122.317c24.858 16.794 40.397 45.005 40.448 76.16l0.128 79.206c0 4.378 1.382 8.55 3.942 12.083l46.669 64c23.603 32.358 23.68 75.904 0.179 108.339l-46.438 64.154c-2.56 3.533-3.917 7.731-3.917 12.109l0.128 79.206c0.077 40.038-25.472 75.315-63.539 87.757l-75.29 24.602c-4.147 1.357-7.706 3.942-10.291 7.501l-46.438 64.154c-23.475 32.435-64.87 45.978-102.989 33.664l-75.366-24.346c-4.173-1.357-8.576-1.331-12.723 0l-75.29 24.602c-38.067 12.442-79.488-0.947-103.091-33.306l-46.669-64c-2.586-3.533-6.144-6.118-10.317-7.45l-75.366-24.346c-38.118-12.314-63.77-47.488-63.821-87.526l-0.128-79.206c0-4.378-1.382-8.55-3.942-12.083l-46.669-64c-23.603-32.358-23.68-75.904-0.179-108.339l46.438-64.154c2.56-3.533 3.917-7.731 3.917-12.109l-0.128-79.206c-0.051-31.693 15.923-60.365 41.446-77.133l-85.888-122.675c-12.186-17.408-14.464-39.475-6.067-59.008s25.984-33.050 47.027-36.173l54.758-8.115 26.368-48.666c10.138-18.688 28.851-30.592 50.074-31.821 1.203-0.077 2.381-0.102 3.584-0.102 19.866 0 38.298 9.549 49.818 25.984l95.053 135.757c7.475 0.486 14.976 1.894 22.349 4.275l75.366 24.346c4.173 1.357 8.55 1.331 12.723 0l75.29-24.602c7.987-2.611 16.102-4.070 24.166-4.48l94.72-135.296c11.52-16.435 29.926-25.984 49.818-25.984 1.178 0 2.381 0.026 3.584 0.102 21.222 1.229 39.962 13.107 50.074 31.821l26.368 48.666z"/></g></svg>
+                  <strong>{{ badge_text }}</strong>
+                </a>
+              </div>
+              <a href="{{ p.url }}" class="tv-prod__img-link">
+                <div class="tv-prod__img-wrap">
+                  {%- if p.featured_image != blank -%}
+                    <img src="{{ p.featured_image | image_url: width: 400 }}" alt="{{ p.featured_image.alt | escape }}" width="400" height="400" loading="lazy">
+                  {%- endif -%}
+                </div>
+              </a>
+              <div class="tv-prod__info">
+                <a href="{{ p.url }}" class="tv-prod__name-link">
+                  <div class="tv-prod__name">{{ p.title }}</div>
+                </a>
+                <div class="tv-prod__description">{{ p.description | strip_html | truncate: 120 }}</div>
+                {%- if p.metafields.custom.specs != blank -%}
+                  <div class="tv-prod__specs">{{ p.metafields.custom.specs }}</div>
+                {%- endif -%}
+                <div class="tv-prod__price-row">
+                  <div class="tv-prod__price">{{ p.price | money }}</div>
+                </div>
+                <div class="tv-prod__actions">
+                  <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ p.selected_or_first_available_variant.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="tv-prod__add-btn">
+                      <span>Add to Cart</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="tv-prod__card-inner tv-prod__card-inner--empty">
+              <p class="tv-prod__empty">Select a product in the theme customizer</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+/* ===== Products Section ===== */
+.tv-prod {
+  margin-bottom: 80px;
+}
+
+.tv-prod__wrapper {
+  max-width: 1400px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Header */
+.tv-prod__header {
+  text-align: center;
+}
+
+.tv-prod__separator {
+  display: block;
+  margin: 10px auto 20px;
+  width: 80px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: #ffa500;
+}
+
+.tv-prod__title {
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-size: 44px;
+  line-height: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 0 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #333;
+}
+
+/* Grid */
+.tv-prod__grid {
+  display: flex;
+}
+
+.tv-prod__area {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% / 4);
+  align-items: center;
+  margin-bottom: 0;
+}
+
+/* Area label */
+.tv-prod__area-label {
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  min-height: 211px;
+}
+
+.tv-prod__area:hover .tv-prod__area-label {
+  color: #212121;
+  filter: opacity(0.5);
+  transition: 0.5s;
+}
+
+/* Card */
+.tv-prod__card {
+  width: 100%;
+  flex: 1;
+}
+
+.tv-prod__card-inner {
+  margin: -8px 10px 20px 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.15);
+  padding: 12px;
+  position: relative;
+  flex: 1;
+}
+
+.tv-prod__card-inner--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.tv-prod__empty {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+}
+
+/* Badge */
+.tv-prod__badge {
+  position: absolute;
+  z-index: 10;
+}
+
+.tv-prod__badge a {
+  display: flex;
+  align-items: center;
+  color: #f6a400;
+  font-size: 12px;
+  line-height: 12px;
+  background-color: rgba(246, 164, 0, 0.3);
+  padding: 3px 5px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.tv-prod__badge a:hover {
+  background: #f6a400;
+  background: linear-gradient(0deg, rgba(51,51,51,1) 50%, rgba(246,164,0,1) 50%);
+  background-size: 200% 200%;
+  background-position-y: 0;
+  animation: tv-prod-grad .1s ease forwards;
+  color: #fff;
+}
+
+@keyframes tv-prod-grad {
+  to { background-position-y: 100%; }
+}
+
+.tv-prod__badge svg {
+  margin-right: 5px;
+}
+
+.tv-prod__badge strong {
+  font-weight: 600;
+}
+
+/* Image */
+.tv-prod__img-link {
+  display: block;
+  text-decoration: none;
+}
+
+.tv-prod__img-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.tv-prod__img-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: -20px;
+}
+
+/* Info */
+.tv-prod__info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: -40px;
+}
+
+.tv-prod__name-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.tv-prod__name-link:hover {
+  color: #000;
+}
+
+.tv-prod__name {
+  font-family: 'Raleway', 'Open Sans', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  color: #333;
+  text-align: left;
+}
+
+.tv-prod__description {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  margin: 12px 0;
+  text-align: left;
+}
+
+.tv-prod__specs {
+  text-align: left;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #333;
+}
+
+/* Price */
+.tv-prod__price-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 20px 0 8px;
+  flex-grow: 1;
+}
+
+.tv-prod__price {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Add to cart */
+.tv-prod__actions {
+  margin: 4px 0 0 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tv-prod__actions form {
+  width: 100%;
+  margin: 0;
+}
+
+.tv-prod__add-btn {
+  border: none;
+  padding: 8px 40px;
+  border-radius: 40px;
+  font-weight: 700;
+  color: #fff;
+  background: #f6a400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+  cursor: pointer;
+  width: 100%;
+  height: 40px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.tv-prod__add-btn:hover {
+  background: #f6a400;
+  background: linear-gradient(0deg, rgba(51,51,51,1) 50%, rgba(246,164,0,1) 50%);
+  background-size: 200% 200%;
+  background-position-y: 0;
+  animation: tv-prod-grad .1s ease forwards;
+  color: #fff;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1190px) {
+  .tv-prod__grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tv-prod__area {
+    width: calc(100% / 3);
+  }
+  .tv-prod__area-label {
+    min-height: 237px;
+  }
+}
+
+@media (max-width: 900px) {
+  .tv-prod__area {
+    width: calc(100% / 2);
+  }
+  .tv-prod__area-label {
+    min-height: 188px;
+  }
+}
+
+@media (max-width: 550px) {
+  .tv-prod__area {
+    width: 100%;
+    margin-top: -1px;
+  }
+  .tv-prod__area-label {
+    background-size: cover;
+  }
+  .tv-prod__card-inner {
+    margin: -8px 0 18px 0;
+  }
+  .tv-prod__area--1,
+  .tv-prod__area--3 {
+    background: #9e9e9e;
+  }
+}
+
+@media (max-width: 767px) {
+  .tv-prod__add-btn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .tv-prod__title {
+    font-size: 34px;
+    line-height: 40px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Televes Products",
+  "tag": "section",
+  "class": "tv-section-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "An antenna for every area"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "30-day refund"
+    },
+    {
+      "type": "url",
+      "id": "badge_link",
+      "label": "Badge link"
+    },
+    {
+      "type": "header",
+      "content": "Area 1 — Indoor / Urban"
+    },
+    {
+      "type": "text",
+      "id": "area1_label",
+      "label": "Area label",
+      "default": "indoor/urban"
+    },
+    {
+      "type": "product",
+      "id": "product1",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Area 2 — Metro / Suburban"
+    },
+    {
+      "type": "text",
+      "id": "area2_label",
+      "label": "Area label",
+      "default": "metro/suburban"
+    },
+    {
+      "type": "product",
+      "id": "product2",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Area 3 — Towns / Rural"
+    },
+    {
+      "type": "text",
+      "id": "area3_label",
+      "label": "Area label",
+      "default": "towns/rural"
+    },
+    {
+      "type": "product",
+      "id": "product3",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Area 4 — Countryside"
+    },
+    {
+      "type": "text",
+      "id": "area4_label",
+      "label": "Area label",
+      "default": "countryside"
+    },
+    {
+      "type": "product",
+      "id": "product4",
+      "label": "Product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Televes Products"
+    }
+  ]
+}
+{% endschema %}
