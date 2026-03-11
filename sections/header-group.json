@@ -43,13 +43,10 @@
       ],
       "settings": {
         "show_account_links": true,
-        "show_account_icon": true,
         "login_label": "Log in",
         "register_label": "Create account",
         "account_label": "My Account",
-        "logout_label": "Log out",
-        "section_width": "page-width",
-        "color_scheme": "scheme-1"
+        "logout_label": "Log out"
       }
     },
     "header_announcements_9jGBFp": {
@@ -72,6 +69,7 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
+      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -124,6 +122,7 @@
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -140,6 +139,10 @@
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "",
         "color_scheme_transparent": "scheme-6",
