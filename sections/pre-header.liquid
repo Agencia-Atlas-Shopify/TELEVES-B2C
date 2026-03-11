@@ -1,158 +1,238 @@
-<div class="pre-header-wrapper color-{{ section.settings.color_scheme }}">
-  <div class="pre-header section--{{ section.settings.section_width }}">
-    {%- comment -%} Left side: Navigation links {%- endcomment -%}
-    <div class="pre-header__links-left">
-      {%- assign has_nav_links = false -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'nav_link' -%}
-          {%- assign has_nav_links = true -%}
-          <div class="pre-header__link-item" {{ block.shopify_attributes }}>
-            <a href="{{ block.settings.link }}" class="pre-header__link">
-              {{- block.settings.label -}}
-            </a>
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
+{%- comment -%}
+  Pre-header bar - Televes store reference (1:1 clone)
+  Left: Navigation links (Support, About us, Contact us)
+  Right: User icon + Account links (Log in, Create account)
+  Hidden on mobile (<768px)
+{%- endcomment -%}
 
-      {%- unless has_nav_links -%}
-        <div class="pre-header__link-item">
-          <a href="/pages/support" class="pre-header__link">Support</a>
-        </div>
-        <div class="pre-header__link-item">
-          <a href="/pages/about-us" class="pre-header__link">About us</a>
-        </div>
-        <div class="pre-header__link-item">
-          <a href="/pages/contact-us" class="pre-header__link">Contact us</a>
-        </div>
-      {%- endunless -%}
+<div class="televes-pre-header__wrapper">
+  <div class="televes-pre-header">
+    {%- comment -%} Left side: Navigation links (order: 0) {%- endcomment -%}
+    <div class="televes-pre-header__nav">
+      <div class="televes-pre-header__nav-inner">
+        {%- assign has_nav_links = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'nav_link' -%}
+            {%- assign has_nav_links = true -%}
+            <div class="televes-pre-header__nav-item" {{ block.shopify_attributes }}>
+              <a class="televes-pre-header__nav-link" href="{{ block.settings.link }}">
+                {{- block.settings.label -}}
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- unless has_nav_links -%}
+          <div class="televes-pre-header__nav-item">
+            <a class="televes-pre-header__nav-link" href="/pages/support">Support</a>
+          </div>
+          <div class="televes-pre-header__nav-item">
+            <a class="televes-pre-header__nav-link" href="/pages/about-us">About us</a>
+          </div>
+          <div class="televes-pre-header__nav-item">
+            <a class="televes-pre-header__nav-link" href="/pages/contact-us">Contact us</a>
+          </div>
+        {%- endunless -%}
+      </div>
     </div>
 
-    {%- comment -%} Right side: Account links {%- endcomment -%}
+    {%- comment -%} Right side: User icon (order: 1) {%- endcomment -%}
     {%- if section.settings.show_account_links -%}
-      <div class="pre-header__links-right">
-        <div class="pre-header__account">
-          {%- if section.settings.show_account_icon -%}
-            <span class="pre-header__account-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </span>
-          {%- endif -%}
+      <div class="televes-pre-header__user-icon">
+        <span class="televes-pre-header__user-icon-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </span>
+      </div>
 
-          {%- if customer -%}
-            <a href="{{ routes.account_url }}" class="pre-header__link">
+      {%- comment -%} Account links (margin-left: auto, pushed to far right) {%- endcomment -%}
+      <ul class="televes-pre-header__account-links">
+        {%- if customer -%}
+          <li>
+            <a href="{{ routes.account_url }}">
               {{ customer.first_name | default: section.settings.account_label }}
             </a>
-            <a href="{{ routes.account_logout_url }}" class="pre-header__link">
+          </li>
+          <li>
+            <a href="{{ routes.account_logout_url }}">
               {{ section.settings.logout_label }}
             </a>
-          {%- else -%}
-            <a href="{{ routes.account_login_url }}" class="pre-header__link">
+          </li>
+        {%- else -%}
+          <li>
+            <a href="{{ routes.account_login_url }}">
               {{ section.settings.login_label }}
             </a>
-            <a href="{{ routes.account_register_url }}" class="pre-header__link">
+          </li>
+          <li>
+            <a href="{{ routes.account_register_url }}">
               {{ section.settings.register_label }}
             </a>
-          {%- endif -%}
-        </div>
-      </div>
+          </li>
+        {%- endif -%}
+      </ul>
     {%- endif -%}
   </div>
 </div>
 
 {% stylesheet %}
-  .pre-header-wrapper {
-    border-bottom: 1px solid var(--pre-header-border-color, #e8e8e8);
+  /* ============================================
+     Pre-header wrapper
+     ============================================ */
+  .televes-pre-header__wrapper {
+    margin-bottom: 0;
+    z-index: 500;
   }
 
-  .pre-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 32px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 20px;
-    font-size: 12px;
-    font-family: var(--font-body--family, 'Open Sans', Arial, Helvetica, sans-serif);
+  @media (min-width: 769px) {
+    .televes-pre-header__wrapper {
+      border-bottom: 1px solid #e8e8e8;
+    }
   }
 
-  .pre-header.section--page-width {
-    max-width: var(--page-width, 1400px);
-  }
-
-  .pre-header.section--full-width {
-    max-width: 100%;
-  }
-
-  .pre-header__links-left {
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-
-  .pre-header__link-item {
-    padding-right: 32px;
-  }
-
-  .pre-header__link-item:last-child {
-    padding-right: 0;
-  }
-
-  .pre-header__links-right {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-  }
-
-  .pre-header__account {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .pre-header__account-icon {
-    display: flex;
-    align-items: center;
-    margin-right: -5px;
-    color: var(--pre-header-text-color, #333);
-  }
-
-  .pre-header__link {
-    color: var(--pre-header-link-color, #afafaf);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 4px 0;
-    border-bottom: 2px solid transparent;
-    line-height: 1.4;
-  }
-
-  .pre-header__link:hover {
-    color: var(--pre-header-link-hover-color, #333);
-    border-bottom-color: var(--pre-header-link-hover-color, #333);
-    text-decoration: none;
-  }
-
-  .pre-header__links-right .pre-header__link {
-    color: var(--pre-header-account-link-color, #666);
-  }
-
-  .pre-header__links-right .pre-header__link:hover {
-    color: var(--pre-header-link-hover-color, #333);
-    border-bottom-color: var(--pre-header-link-hover-color, #333);
-  }
-
-  @media screen and (max-width: 767px) {
-    .pre-header-wrapper {
+  @media (max-width: 768px) {
+    .televes-pre-header__wrapper {
       display: none;
     }
   }
 
-  @media screen and (max-width: 1432px) {
-    .pre-header {
+  @media (max-width: 1432px) {
+    .televes-pre-header__wrapper {
       padding-left: 16px;
       padding-right: 16px;
+    }
+  }
+
+  /* ============================================
+     Pre-header inner container
+     ============================================ */
+  .televes-pre-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-right: 6px;
+    font-size: 12px;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+  }
+
+  /* ============================================
+     Left navigation links
+     ============================================ */
+  .televes-pre-header__nav {
+    order: 0;
+  }
+
+  .televes-pre-header__nav-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 575px) {
+    .televes-pre-header__nav-inner {
+      display: none;
+    }
+  }
+
+  .televes-pre-header__nav-item {
+    padding-right: 32px;
+  }
+
+  .televes-pre-header__nav-link {
+    color: #afafaf;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    outline: 0;
+  }
+
+  .televes-pre-header__nav-link:hover {
+    color: #000;
+    text-decoration: none;
+  }
+
+  /* ============================================
+     User icon
+     ============================================ */
+  .televes-pre-header__user-icon {
+    list-style: none;
+    order: 1;
+  }
+
+  .televes-pre-header__user-icon-inner {
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+    margin-right: 4px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  /* ============================================
+     Account links
+     ============================================ */
+  .televes-pre-header__account-links {
+    display: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: auto;
+    font-size: 0;
+  }
+
+  @media (min-width: 769px) {
+    .televes-pre-header__account-links {
+      display: inline-block;
+    }
+  }
+
+  .televes-pre-header__account-links > li {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    margin: 0 0 0 15px;
+    padding: 5px 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .televes-pre-header__account-links > li > a {
+    padding: 4px 0;
+    margin: 0;
+    border-bottom: 2px solid transparent;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s;
+    line-height: 1.4;
+    cursor: pointer;
+    outline: 0;
+  }
+
+  .televes-pre-header__account-links > li > a:hover {
+    cursor: pointer;
+    color: #333;
+    border-bottom: 2px solid #333;
+    text-decoration: none;
+  }
+
+  /* ============================================
+     Mobile: Account links as dropdown
+     ============================================ */
+  @media (max-width: 768px) {
+    .televes-pre-header__user-icon {
+      display: none;
+    }
+
+    .televes-pre-header__nav {
+      display: none;
     }
   }
 {% endstylesheet %}
@@ -160,7 +240,7 @@
 {% schema %}
 {
   "name": "Pre-header",
-  "class": "pre-header-section",
+  "class": "televes-pre-header-section",
   "enabled_on": {
     "groups": ["header"]
   },
@@ -173,12 +253,6 @@
       "type": "checkbox",
       "id": "show_account_links",
       "label": "Show account links",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_account_icon",
-      "label": "Show account icon",
       "default": true
     },
     {
@@ -204,32 +278,6 @@
       "id": "logout_label",
       "label": "Logout label",
       "default": "Log out"
-    },
-    {
-      "type": "header",
-      "content": "Appearance"
-    },
-    {
-      "type": "select",
-      "id": "section_width",
-      "label": "Section width",
-      "options": [
-        {
-          "value": "page-width",
-          "label": "Page width"
-        },
-        {
-          "value": "full-width",
-          "label": "Full width"
-        }
-      ],
-      "default": "page-width"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color scheme",
-      "default": "scheme-1"
     }
   ],
   "blocks": [
