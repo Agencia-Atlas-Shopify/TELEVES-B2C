@@ -1,0 +1,638 @@
+{%- comment -%}
+  Televes "3 Easy Steps" Section - 1:1 clone of store.televes.com
+  Self-contained: HTML + CSS + JS
+{%- endcomment -%}
+
+{%- liquid
+  assign heading = section.settings.heading | default: 'Cut the cord and get free tv at home'
+  assign subheading = section.settings.subheading | default: 'In three easy steps'
+  assign step1_title = section.settings.step1_title | default: 'Choose'
+  assign step1_text = section.settings.step1_text
+  assign step1_link = section.settings.step1_link
+  assign step1_link_label = section.settings.step1_link_label | default: 'Get discounted advice from Antenna Man!'
+  assign step1_code = section.settings.step1_code | default: 'TELEVES'
+  assign step2_title = section.settings.step2_title | default: 'INSTALL the antenna'
+  assign step2_text = section.settings.step2_text
+  assign step2_link = section.settings.step2_link
+  assign step2_link_label = section.settings.step2_link_label | default: 'installer network'
+  assign step3_title = section.settings.step3_title | default: 'Enjoy!'
+  assign step3_text = section.settings.step3_text | default: 'Start watching free TV!'
+-%}
+
+{%- comment -%} Background images that need Liquid asset_url {%- endcomment -%}
+<style>
+  .tv-step--1 .tv-step__tip { background-image: url('{{ 'tv-steps-punta.svg' | asset_url }}'); }
+  .tv-step--2 .tv-step__tail { background-image: url('{{ 'tv-steps-cola-dos.svg' | asset_url }}'); }
+  .tv-step--2 .tv-step__tip { background-image: url('{{ 'tv-steps-punta.svg' | asset_url }}'); }
+  .tv-step--3 .tv-step__tail { background-image: url('{{ 'tv-steps-cola-tres.svg' | asset_url }}'); }
+  @media (max-width: 1023px) {
+    .tv-step--1 .tv-step__tip { background-image: url('{{ 'tv-steps-punta-flecha-mvl.svg' | asset_url }}'); }
+    .tv-step--2 .tv-step__tail { background-image: url('{{ 'tv-steps-dos-mvl.svg' | asset_url }}'); }
+    .tv-step--2 .tv-step__tip { background-image: url('{{ 'tv-steps-punta-flecha-mvl.svg' | asset_url }}'); }
+    .tv-step--3 .tv-step__tail { background-image: url('{{ 'tv-steps-tres-mvl.svg' | asset_url }}'); }
+  }
+</style>
+
+<section class="tv-steps" id="tv-steps-{{ section.id }}">
+  <div class="tv-steps__container">
+    <h2 class="tv-steps__heading">{{ heading }}</h2>
+    <h3 class="tv-steps__subheading">{{ subheading }}</h3>
+
+    <div class="tv-steps__row">
+
+      {%- comment -%} ====== STEP 1: Choose ====== {%- endcomment -%}
+      <div class="tv-step tv-step--1 tv-steps__item" data-tv-step>
+        <div class="tv-step__tail"></div>
+        <div class="tv-step__body tv-step__body--white">
+          <div class="tv-step__content" style="padding: 0 10px;">
+            {%- comment -%} Icon: ecommerce-icons e90f "cursor" {%- endcomment -%}
+            <svg class="tv-step__icon tv-step__icon--orange" width="32" height="32" viewBox="0 0 1024 1024" fill="currentColor"><path d="M530.586-61.44c-4.198 0-8.371 0.742-12.39 2.202-9.011 3.328-16.307 10.112-20.275 18.867l-113.306 250.419-154.675-147.584c-10.368-9.907-25.651-12.646-38.835-7.014s-21.734 18.611-21.734 32.947v833.203c0 14.208 8.397 27.059 21.376 32.794 13.005 5.734 28.134 3.251 38.63-6.323l613.555-560.435c10.547-9.651 14.362-24.627 9.702-38.144s-16.896-22.963-31.155-24.064l-226.739-17.28 118.221-247.629c4.122-8.602 4.608-18.509 1.408-27.469-3.2-8.986-9.856-16.333-18.483-20.378l-150.067-70.707c-4.813-2.278-10.035-3.405-15.283-3.405zM396.442 306.714c2.278 0 4.557-0.205 6.835-0.666 11.392-2.227 21.018-9.83 25.805-20.403l119.117-263.296 84.557 39.834-125.261 262.323c-5.094 10.675-4.608 23.168 1.331 33.382 5.914 10.24 16.512 16.896 28.288 17.792l196.25 14.95-492.288 449.69v-668.186l130.662 124.646c6.733 6.426 15.616 9.907 24.73 9.907z" transform="translate(0, 960) scale(1, -1)"/></svg>
+            <h3 class="tv-step__title tv-step__title--orange">{{ step1_title }}</h3>
+            {%- if step1_text != blank -%}
+              <div class="tv-step__text">{{ step1_text }}</div>
+            {%- else -%}
+              <p><a href="{{ step1_link | default: '#' }}">{{ step1_link_label }}</a></p>
+              <p>Use code <strong class="tv-step__code">{{ step1_code }}</strong></p>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="tv-step__tip"></div>
+      </div>
+
+      {%- comment -%} Arrow 1 {%- endcomment -%}
+      <div class="tv-steps__arrow tv-steps__item" data-tv-step>
+        <img class="tv-steps__arrow-desktop" src="{{ 'tv-steps-flecha.svg' | asset_url }}" alt="" loading="lazy">
+        <img class="tv-steps__arrow-mobile" src="{{ 'tv-steps-flecha-mvl.svg' | asset_url }}" alt="" loading="lazy">
+      </div>
+
+      {%- comment -%} ====== STEP 2: Install ====== {%- endcomment -%}
+      <div class="tv-step tv-step--2 tv-steps__item" data-tv-step>
+        <div class="tv-step__tail"></div>
+        <div class="tv-step__body tv-step__body--white">
+          <div class="tv-step__content">
+            {%- comment -%} Icon: ecommerce-icons e916 "self-installation" {%- endcomment -%}
+            <svg class="tv-step__icon tv-step__icon--orange" width="32" height="32" viewBox="0 0 1024 1024" fill="currentColor"><path d="M609.306 307.763c-19.789 0-35.84 16.051-35.84 35.84v172.288c0 14.31 8.525 27.264 21.658 32.922 70.016 30.131 115.251 98.842 115.251 175.027 0 45.466-16.282 88.653-44.672 122.47v-119.27c0-13.005-7.040-25.011-18.432-31.334l-108.902-60.57c-10.752-5.965-23.782-6.016-34.586-0.154l-111.027 60.57c-11.52 6.272-18.688 18.355-18.688 31.462v119.27c-28.39-33.818-44.672-77.005-44.672-122.47 0-76.186 45.235-144.87 115.251-175.027 13.158-5.658 21.658-18.611 21.658-32.922v-170.445c0-19.789-16.051-35.84-35.84-35.84s-35.84 16.051-35.84 35.84v148.045c-83.891 45.594-136.934 133.581-136.934 230.349s51.712 182.784 134.835 229.094c11.11 6.195 24.653 6.016 35.61-0.41s17.69-18.202 17.69-30.899v-173.338l75.034-40.909 73.242 40.73v173.517c0 12.698 6.733 24.474 17.69 30.899s24.499 6.579 35.61 0.41c83.098-46.31 134.733-134.093 134.733-229.094s-53.018-184.755-136.934-230.349v-149.888c0-19.789-16.051-35.84-35.84-35.84zM663.168-61.44h-400.358c-34.15 0-61.926 27.776-61.926 61.926l-1.28 343.091c0 76.672 62.259 138.931 138.803 138.931h90.163c19.789 0 35.84-16.051 35.84-35.84s-16.051-35.84-35.84-35.84h-90.163c-37.018 0-67.123-30.106-67.123-67.123l1.229-333.466h390.63c25.805 0 47.744 18.458 52.173 43.878l36.813 211.738c1.843 10.624-0.947 20.992-7.885 29.235s-16.691 12.774-27.469 12.774h-346.906c-19.789 0-35.84 16.051-35.84 35.84s16.051 35.84 35.84 35.84h346.931c31.821 0 61.824-13.978 82.304-38.323s29.107-56.32 23.654-87.654l-36.813-211.738c-10.419-59.853-62.054-103.27-122.778-103.27zM272.563 0.691v-0.077s0 0.051 0 0.077z" transform="translate(0, 960) scale(1, -1)"/></svg>
+            <h3 class="tv-step__title tv-step__title--orange">{{ step2_title }}</h3>
+            {%- if step2_text != blank -%}
+              <div class="tv-step__text">{{ step2_text }}</div>
+            {%- else -%}
+              <p>Need help? Use our <a href="{{ step2_link | default: '#' }}">{{ step2_link_label }}</a></p>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="tv-step__tip"></div>
+      </div>
+
+      {%- comment -%} Arrow 2 {%- endcomment -%}
+      <div class="tv-steps__arrow tv-steps__item" data-tv-step>
+        <img class="tv-steps__arrow-desktop" src="{{ 'tv-steps-flecha.svg' | asset_url }}" alt="" loading="lazy">
+        <img class="tv-steps__arrow-mobile" src="{{ 'tv-steps-flecha-mvl.svg' | asset_url }}" alt="" loading="lazy">
+      </div>
+
+      {%- comment -%} ====== STEP 3: Enjoy! ====== {%- endcomment -%}
+      <div class="tv-step tv-step--3 tv-steps__item" data-tv-step>
+        <div class="tv-step__tail"></div>
+        <div class="tv-step__body tv-step__body--orange">
+          <div class="tv-step__content tv-step__content--white">
+            {%- comment -%} Icon: ecommerce-icons e93e "confetti" {%- endcomment -%}
+            <svg class="tv-step__icon tv-step__icon--enjoy" width="80" height="80" viewBox="0 0 1024 1024" fill="currentColor"><path d="M307.482 644.198c-7.654 7.603-18.637 10.854-29.21 8.602s-19.277-9.651-23.194-19.738l-252.288-650.496c-4.608-11.853-1.741-25.318 7.27-34.278 6.118-6.067 14.259-9.293 22.554-9.293 3.942 0 7.936 0.742 11.75 2.227l648.934 256.307c10.035 3.968 17.408 12.723 19.584 23.296s-1.126 21.53-8.781 29.158l-396.621 394.214zM297.062 564.326l72.602-72.166c-0.256-1.869-0.358-3.763-0.282-5.683 7.757-170.675 61.235-256.845 98.099-309.299l-95.13-37.581c-4.25 6.323-8.883 12.826-13.747 19.635-36.48 51.149-91.622 128.435-99.507 302.131-0.051 1.357-0.23 2.662-0.461 3.968l38.4 98.97zM216.602 78.080c-1.587 2.202-3.226 4.403-4.941 6.707-18.15 24.32-42.982 57.651-46.387 136.269-0.051 0.947-0.154 1.894-0.256 2.816l44.518 114.79c23.219-113.126 67.661-175.437 96.998-216.576 1.613-2.253 3.174-4.454 4.71-6.63l-94.618-37.376zM121.933 112.768c10.342-26.317 22.784-44.902 33.075-59.008l-66.099-26.112 33.024 85.12zM528.794 201.37c-0.384 0.538-0.768 1.075-1.152 1.638-29.517 41.395-71.91 100.915-88.32 219.955l185.011-183.859-95.514-37.734zM439.168 625.562c-11.315-13.568-9.472-33.766 4.096-45.056 5.99-4.992 13.235-7.424 20.48-7.424 9.165 0 18.278 3.917 24.602 11.52 53.12 63.744 133.658 202.931 98.483 320.154-5.069 16.922-22.912 26.547-39.834 21.453-16.922-5.069-26.522-22.912-21.453-39.834 25.446-84.787-37.709-202.419-86.349-260.787zM997.862 563.2c-119.834 24.832-251.469-67.507-310.374-125.978-12.544-12.442-12.621-32.717-0.154-45.261 6.246-6.298 14.49-9.446 22.707-9.446s16.307 3.098 22.554 9.293c53.914 53.555 165.606 126.694 252.288 108.723 17.306-3.584 34.253 7.526 37.837 24.832s-7.526 34.253-24.832 37.837zM545.331 547.712c-11.648-13.286-10.342-33.51 2.944-45.158 6.067-5.325 13.594-7.936 21.094-7.936 8.883 0 17.741 3.686 24.064 10.906 3.558 4.045 5.504 5.043 26.598 1.152 21.146-3.891 56.525-10.419 84.992 20.224 32.512 35.021 21.53 70.63 14.976 91.93-5.325 17.306-4.582 18.099-2.125 20.762 3.251 3.533 5.248 4.454 25.472 0.538 20.992-4.045 56.141-10.829 84.608 19.942 28.109 30.413 19.098 63.565 13.696 83.354-1.459 5.35-3.891 14.285-3.405 16.64 0 0 0.41 0.742 2.048 2.099 5.35 4.454 18.611 4.506 31.411 4.557 23.782 0.077 59.699 0.205 81.971 32.64 22.042 32.051 13.875 62.95 8.474 83.43-1.382 5.222-3.405 12.928-3.354 16.128 0.23 0.23 0.589 0.538 1.075 0.947 13.901 10.931 16.307 31.027 5.402 44.928-10.931 13.901-31.027 16.307-44.928 5.402-34.918-27.443-25.267-64.051-20.070-83.712 4.762-18.074 5.402-23.962 0.666-30.822-2.842-4.122-11.008-4.813-29.466-4.89-21.888-0.077-49.126-0.179-72.166-19.379-34.637-28.851-24.755-65.203-19.43-84.71 4.89-17.946 4.198-19.712 1.050-23.117-3.251-3.533-5.248-4.454-25.472-0.538-21.018 4.045-56.166 10.829-84.608-19.942-28.237-30.541-18.099-63.411-12.058-83.046 5.965-19.379 5.888-22.426-0.717-29.542-3.61-3.891-6.682-4.48-26.496-0.845-21.606 3.968-57.754 10.65-86.298-21.888zM746.65 858.496c0-19.794-16.046-35.84-35.84-35.84s-35.84 16.046-35.84 35.84c0 19.794 16.046 35.84 35.84 35.84s35.84-16.046 35.84-35.84zM965.068 678.63c3.171-19.538-10.096-37.948-29.634-41.119s-37.948 10.096-41.119 29.634c-3.171 19.538 10.096 37.948 29.634 41.119s37.948-10.096 41.119-29.634zM887.27 318.387c0-19.794-16.046-35.84-35.84-35.84s-35.84 16.046-35.84 35.84c0 19.794 16.046 35.84 35.84 35.84s35.84-16.046 35.84-35.84zM456.243 767.283c0-19.794-16.046-35.84-35.84-35.84s-35.84 16.046-35.84 35.84c0 19.794 16.046 35.84 35.84 35.84s35.84-16.046 35.84-35.84z" transform="translate(0, 960) scale(1, -1)"/></svg>
+            <h3 class="tv-step__title tv-step__title--enjoy">{{ step3_title }}</h3>
+            {%- if step3_text != blank -%}
+              <div class="tv-step__text">{{ step3_text }}</div>
+            {%- else -%}
+              <p>Start watching free TV!</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  /* Scroll-triggered animation for steps */
+  (function() {
+    var section = document.getElementById('tv-steps-{{ section.id }}');
+    if (!section) return;
+    var items = section.querySelectorAll('[data-tv-step]');
+    if (!items.length) return;
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var allItems = section.querySelectorAll('[data-tv-step]');
+            allItems.forEach(function(item, i) {
+              item.style.animationDelay = (i * 0.4) + 's';
+              item.classList.add('tv-steps--animate');
+            });
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.2 });
+      observer.observe(section);
+    } else {
+      items.forEach(function(item) {
+        item.classList.add('tv-steps--animate');
+      });
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  /* ============================================
+     TELEVES 3 EASY STEPS - 1:1 Clone
+     Reference: store.televes.com homepage
+     ============================================ */
+
+  /* ---- Animation ---- */
+  @keyframes tv-enterSteps {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ---- Section wrapper ---- */
+  .tv-steps {
+    background: linear-gradient(0deg, rgb(227, 227, 227) 0%, rgb(245, 245, 245) 100%);
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+  }
+
+  .tv-steps *,
+  .tv-steps *::before,
+  .tv-steps *::after {
+    box-sizing: border-box;
+  }
+
+  .tv-steps__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+
+  /* ---- Headings ---- */
+  .tv-steps__heading {
+    font-family: 'Raleway', 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 44px;
+    line-height: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    color: #333;
+    margin: 0 0 0 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .tv-steps__subheading {
+    font-family: 'Raleway', 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    color: #333;
+    margin: 0 0 40px 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- Steps row (flex) ---- */
+  .tv-steps__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    align-items: stretch;
+  }
+
+  /* ---- Each step item (initial state for animation) ---- */
+  .tv-steps__item {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .tv-steps__item.tv-steps--animate {
+    animation-name: tv-enterSteps;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
+
+  /* ---- Step card ---- */
+  .tv-step {
+    display: flex;
+    flex-wrap: nowrap;
+    width: calc((100% - 70px) / 3);
+  }
+
+  .tv-step--2 {
+    flex-grow: 8;
+  }
+
+  /* ---- Step body ---- */
+  .tv-step__body {
+    flex-grow: 8;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tv-step__body--white {
+    background-color: #fff;
+  }
+
+  .tv-step__body--orange {
+    background-color: #ffa100;
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ---- Step 1 body width (matching inline style from reference) ---- */
+  .tv-step--1 .tv-step__body {
+    width: calc(100% - 64px);
+  }
+
+  /* ---- Step content ---- */
+  .tv-step__content {
+    position: relative;
+    width: 100%;
+    padding: 0 15px;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  .tv-step__content--white {
+    color: #fff;
+  }
+
+  /* ---- Step icons ---- */
+  .tv-step__icon {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .tv-step__icon--orange {
+    color: #ffa100;
+    fill: #ffa100;
+    width: 32px;
+    height: 32px;
+  }
+
+  .tv-step__icon--enjoy {
+    width: 80px;
+    height: 80px;
+    fill: currentColor;
+    position: absolute;
+    top: -56px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+  }
+
+  /* ---- Step titles ---- */
+  .tv-step__title {
+    font-family: 'Raleway', 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .tv-step__title--orange {
+    color: #ffa100;
+  }
+
+  .tv-step__title--enjoy {
+    color: inherit;
+    margin-top: 32px;
+  }
+
+  /* ---- Step text ---- */
+  .tv-step__text p,
+  .tv-step p {
+    margin: 0 0 16px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+  }
+
+  .tv-step p:last-child {
+    margin-bottom: 0;
+  }
+
+  .tv-step__content--white p {
+    color: #fff;
+  }
+
+  .tv-step a {
+    color: #f6a400;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .tv-step a:hover {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .tv-step__content--white a {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .tv-step__content--white a:hover {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .tv-step__code {
+    color: #666;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  /* ---- Tail (left decorative shape) ---- */
+  .tv-step__tail {
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .tv-step--1 .tv-step__tail {
+    display: none;
+  }
+
+  .tv-step--2 .tv-step__tail {
+    width: 99px;
+    height: 100%;
+    background-position-x: left;
+  }
+
+  .tv-step--3 .tv-step__tail {
+    width: 99px;
+    height: 100%;
+    background-position-x: left;
+  }
+
+  /* ---- Tip (right decorative shape) ---- */
+  .tv-step__tip {
+    width: 44px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    flex-shrink: 0;
+  }
+
+  /* ---- Arrows between steps ---- */
+  .tv-steps__arrow {
+    width: 89px;
+    margin-left: -30px;
+    margin-right: -34px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .tv-steps__arrow img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .tv-steps__arrow-mobile {
+    display: none;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+
+  @media (max-width: 1023px) {
+    .tv-steps__row {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .tv-steps__arrow {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+
+    .tv-steps__arrow-desktop {
+      display: none;
+    }
+
+    .tv-steps__arrow-mobile {
+      display: inline-block;
+      transform: none;
+      margin-top: 10px;
+    }
+
+    .tv-step {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .tv-step--2 {
+      margin-top: 10px;
+    }
+
+    .tv-step--3 {
+      margin-top: 10px;
+    }
+
+    /* Step 1 mobile */
+    .tv-step--1 .tv-step__body {
+      border-radius: 0 6px 0 0;
+      width: 100%;
+    }
+
+    .tv-step--1 .tv-step__tip {
+      width: 100%;
+      height: auto;
+      min-height: 20px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-top: -1px;
+      background-position-x: left;
+    }
+
+    /* Step 2 mobile */
+    .tv-step--2 .tv-step__tail {
+      width: 63px;
+      height: 100%;
+      min-height: 146px;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .tv-step--2 .tv-step__body {
+      border-radius: 0 6px 0 0;
+    }
+
+    .tv-step--2 .tv-step__tip {
+      width: 100%;
+      height: auto;
+      min-height: 20px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-top: -1px;
+      background-position-x: left;
+    }
+
+    /* Step 3 mobile */
+    .tv-step--3 .tv-step__tail {
+      width: 74px;
+      height: 100%;
+      min-height: 146px;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .tv-step--3 .tv-step__body {
+      border-radius: 0 6px 0 0;
+    }
+
+    /* Enjoy icon smaller on mobile */
+    .tv-step__icon--enjoy {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      top: -5px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .tv-steps__container {
+      padding: 60px 15px;
+    }
+
+    .tv-steps__heading {
+      font-size: 32px;
+      line-height: 38px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .tv-steps__heading {
+      font-size: 28px;
+      line-height: 34px;
+    }
+
+    .tv-step__title {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .tv-step__icon--orange {
+      width: 28px;
+      height: 28px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Televes 3 Steps",
+  "class": "tv-steps-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Headings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Cut the cord and get free tv at home"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "In three easy steps"
+    },
+    {
+      "type": "header",
+      "content": "Step 1: Choose"
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "Step 1 title",
+      "default": "Choose"
+    },
+    {
+      "type": "richtext",
+      "id": "step1_text",
+      "label": "Step 1 text (overrides default)"
+    },
+    {
+      "type": "url",
+      "id": "step1_link",
+      "label": "Step 1 link"
+    },
+    {
+      "type": "text",
+      "id": "step1_link_label",
+      "label": "Step 1 link label",
+      "default": "Get discounted advice from Antenna Man!"
+    },
+    {
+      "type": "text",
+      "id": "step1_code",
+      "label": "Step 1 promo code",
+      "default": "TELEVES"
+    },
+    {
+      "type": "header",
+      "content": "Step 2: Install"
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "Step 2 title",
+      "default": "INSTALL the antenna"
+    },
+    {
+      "type": "richtext",
+      "id": "step2_text",
+      "label": "Step 2 text (overrides default)"
+    },
+    {
+      "type": "url",
+      "id": "step2_link",
+      "label": "Step 2 link"
+    },
+    {
+      "type": "text",
+      "id": "step2_link_label",
+      "label": "Step 2 link label",
+      "default": "installer network"
+    },
+    {
+      "type": "header",
+      "content": "Step 3: Enjoy"
+    },
+    {
+      "type": "text",
+      "id": "step3_title",
+      "label": "Step 3 title",
+      "default": "Enjoy!"
+    },
+    {
+      "type": "richtext",
+      "id": "step3_text",
+      "label": "Step 3 text (overrides default)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Televes 3 Steps"
+    }
+  ]
+}
+{% endschema %}
