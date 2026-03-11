@@ -1,0 +1,819 @@
+{%- comment -%}
+  Televes Custom Header - 1:1 clone of store.televes.com
+  Self-contained section: HTML + CSS + JS
+{%- endcomment -%}
+
+{%- liquid
+  assign logo_img = section.settings.logo
+  assign logo_width = section.settings.logo_width | default: 170
+  assign menu = linklists[section.settings.menu]
+-%}
+
+<header class="tv-header" id="tv-header">
+  {%- comment -%} ====== MAIN HEADER BAR ====== {%- endcomment -%}
+  <div class="tv-header__main">
+    <div class="tv-header__inner">
+
+      {%- comment -%} Mobile hamburger {%- endcomment -%}
+      <button class="tv-header__toggle" aria-label="Menu" aria-expanded="false" data-tv-drawer-toggle>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      {%- comment -%} Logo {%- endcomment -%}
+      <a class="tv-header__logo" href="{{ routes.root_url }}">
+        {%- if logo_img != blank -%}
+          <img
+            src="{{ logo_img | image_url: width: 340 }}"
+            alt="{{ shop.name }}"
+            width="{{ logo_width }}"
+            height="auto"
+            loading="eager"
+          >
+        {%- else -%}
+          <img
+            src="{{ 'logo-televes.png' | asset_url }}"
+            alt="{{ shop.name }}"
+            width="{{ logo_width }}"
+            height="auto"
+            loading="eager"
+          >
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Desktop Navigation {%- endcomment -%}
+      <nav class="tv-header__nav" aria-label="Main navigation">
+        <ul class="tv-nav">
+          {%- if menu != blank -%}
+            {%- for link in menu.links -%}
+              <li class="tv-nav__item{% if link.links.size > 0 %} tv-nav__item--parent{% endif %}">
+                <a href="{{ link.url }}" class="tv-nav__link">
+                  <span>{{ link.title }}</span>
+                  {%- if link.links.size > 0 -%}
+                    <svg class="tv-nav__caret" width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  {%- endif -%}
+                </a>
+                {%- if link.links.size > 0 -%}
+                  <ul class="tv-nav__dropdown">
+                    {%- for child in link.links -%}
+                      <li class="tv-nav__dropdown-item">
+                        <a href="{{ child.url }}" class="tv-nav__dropdown-link">
+                          <span>{{ child.title }}</span>
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Default fallback menu from reference {%- endcomment -%}
+            <li class="tv-nav__item tv-nav__item--parent">
+              <a href="/collections/tv-antennas" class="tv-nav__link">
+                <span>TV Antennas</span>
+                <svg class="tv-nav__caret" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <ul class="tv-nav__dropdown">
+                <li class="tv-nav__dropdown-item"><a href="/collections/outdoor-antennas" class="tv-nav__dropdown-link"><span>Outdoor Antennas</span></a></li>
+                <li class="tv-nav__dropdown-item"><a href="/collections/indoor-antennas" class="tv-nav__dropdown-link"><span>Indoor Antennas</span></a></li>
+              </ul>
+            </li>
+            <li class="tv-nav__item tv-nav__item--parent">
+              <a href="/collections/amplifiers" class="tv-nav__link">
+                <span>Amplifiers</span>
+                <svg class="tv-nav__caret" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <ul class="tv-nav__dropdown">
+                <li class="tv-nav__dropdown-item"><a href="/collections/mast-amplifiers" class="tv-nav__dropdown-link"><span>Mast Amplifiers</span></a></li>
+                <li class="tv-nav__dropdown-item"><a href="/collections/distribution-amplifiers" class="tv-nav__dropdown-link"><span>Distribution Amplifiers</span></a></li>
+              </ul>
+            </li>
+            <li class="tv-nav__item tv-nav__item--parent">
+              <a href="/collections/accessories" class="tv-nav__link">
+                <span>Accessories</span>
+                <svg class="tv-nav__caret" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <ul class="tv-nav__dropdown">
+                <li class="tv-nav__dropdown-item"><a href="/collections/splitters" class="tv-nav__dropdown-link"><span>Splitters</span></a></li>
+                <li class="tv-nav__dropdown-item"><a href="/collections/power-supplies" class="tv-nav__dropdown-link"><span>Power supplies</span></a></li>
+                <li class="tv-nav__dropdown-item"><a href="/collections/connectors" class="tv-nav__dropdown-link"><span>Connectors</span></a></li>
+              </ul>
+            </li>
+          {%- endif -%}
+        </ul>
+      </nav>
+
+      {%- comment -%} Search {%- endcomment -%}
+      <div class="tv-header__search">
+        <form action="{{ routes.search_url }}" method="get" class="tv-search__form" role="search">
+          <input
+            type="search"
+            name="q"
+            placeholder="{{ section.settings.search_placeholder | default: 'Search' }}"
+            class="tv-search__input"
+            autocomplete="off"
+          >
+          <button type="submit" class="tv-search__btn" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      {%- comment -%} Cart button {%- endcomment -%}
+      <a href="{{ routes.cart_url }}" class="tv-header__cart" aria-label="Cart">
+        {%- comment -%} Cart SVG icon (shopping bag) {%- endcomment -%}
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="tv-header__cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+
+    </div>
+  </div>
+
+  {%- comment -%} ====== MOBILE DRAWER ====== {%- endcomment -%}
+  <div class="tv-drawer" id="tv-drawer" aria-hidden="true">
+    <div class="tv-drawer__overlay" data-tv-drawer-toggle></div>
+    <div class="tv-drawer__panel">
+      <button class="tv-drawer__close" aria-label="Close menu" data-tv-drawer-toggle>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <nav class="tv-drawer__nav" aria-label="Mobile navigation">
+        <ul class="tv-drawer__menu">
+          {%- if menu != blank -%}
+            {%- for link in menu.links -%}
+              <li class="tv-drawer__item{% if link.links.size > 0 %} tv-drawer__item--parent{% endif %}">
+                <a href="{{ link.url }}" class="tv-drawer__link">{{ link.title }}</a>
+                {%- if link.links.size > 0 -%}
+                  <button class="tv-drawer__expand" aria-label="Expand {{ link.title }}" aria-expanded="false">
+                    <svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <ul class="tv-drawer__submenu">
+                    {%- for child in link.links -%}
+                      <li><a href="{{ child.url }}" class="tv-drawer__sublink">{{ child.title }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            <li class="tv-drawer__item tv-drawer__item--parent">
+              <a href="/collections/tv-antennas" class="tv-drawer__link">TV Antennas</a>
+              <button class="tv-drawer__expand" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <ul class="tv-drawer__submenu">
+                <li><a href="/collections/outdoor-antennas" class="tv-drawer__sublink">Outdoor Antennas</a></li>
+                <li><a href="/collections/indoor-antennas" class="tv-drawer__sublink">Indoor Antennas</a></li>
+              </ul>
+            </li>
+            <li class="tv-drawer__item tv-drawer__item--parent">
+              <a href="/collections/amplifiers" class="tv-drawer__link">Amplifiers</a>
+              <button class="tv-drawer__expand" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <ul class="tv-drawer__submenu">
+                <li><a href="/collections/mast-amplifiers" class="tv-drawer__sublink">Mast Amplifiers</a></li>
+                <li><a href="/collections/distribution-amplifiers" class="tv-drawer__sublink">Distribution Amplifiers</a></li>
+              </ul>
+            </li>
+            <li class="tv-drawer__item tv-drawer__item--parent">
+              <a href="/collections/accessories" class="tv-drawer__link">Accessories</a>
+              <button class="tv-drawer__expand" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 10 10" fill="none"><path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <ul class="tv-drawer__submenu">
+                <li><a href="/collections/splitters" class="tv-drawer__sublink">Splitters</a></li>
+                <li><a href="/collections/power-supplies" class="tv-drawer__sublink">Power supplies</a></li>
+                <li><a href="/collections/connectors" class="tv-drawer__sublink">Connectors</a></li>
+              </ul>
+            </li>
+          {%- endif -%}
+        </ul>
+
+        {%- comment -%} Mobile account links {%- endcomment -%}
+        <div class="tv-drawer__account">
+          {%- if customer -%}
+            <a href="{{ routes.account_url }}" class="tv-drawer__account-link">{{ customer.first_name | default: 'My Account' }}</a>
+            <a href="{{ routes.account_logout_url }}" class="tv-drawer__account-link">Log out</a>
+          {%- else -%}
+            <a href="{{ routes.account_login_url }}" class="tv-drawer__account-link">Log in</a>
+            <a href="{{ routes.account_register_url }}" class="tv-drawer__account-link">Create account</a>
+          {%- endif -%}
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  /* Televes header: drawer toggle + dropdown hover */
+  (function() {
+    const toggles = document.querySelectorAll('[data-tv-drawer-toggle]');
+    const drawer = document.getElementById('tv-drawer');
+    const header = document.getElementById('tv-header');
+
+    toggles.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const open = drawer.getAttribute('aria-hidden') === 'true';
+        drawer.setAttribute('aria-hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+        const hamburger = header.querySelector('.tv-header__toggle');
+        if (hamburger) hamburger.setAttribute('aria-expanded', open);
+      });
+    });
+
+    /* Mobile submenu expand */
+    document.querySelectorAll('.tv-drawer__expand').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        const submenu = btn.nextElementSibling;
+        if (submenu) submenu.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  /* ============================================
+     TELEVES HEADER - Complete 1:1 Clone
+     Reference: store.televes.com
+     ============================================ */
+
+  /* ---- Variables ---- */
+  .tv-header {
+    --tv-max-width: 1400px;
+    --tv-orange: #f6a400;
+    --tv-dark: #333;
+    --tv-gray: #575757;
+    --tv-light-gray: #afafaf;
+    --tv-medium-gray: #666;
+    --tv-border: #e8e8e8;
+    --tv-red: #D84315;
+    --tv-font: 'Raleway', 'Open Sans', Arial, Helvetica, sans-serif;
+    --tv-font-body: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --tv-header-height: 60px;
+  }
+
+  /* ---- Header wrapper ---- */
+  .tv-header {
+    font-family: var(--tv-font);
+    text-transform: uppercase;
+    font-weight: 400;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+    position: relative;
+    background: #fff;
+  }
+
+  /* ---- Main header bar ---- */
+  .tv-header__main {
+    background: #fff;
+  }
+
+  .tv-header__inner {
+    display: flex;
+    align-items: center;
+    height: var(--tv-header-height);
+    max-width: var(--tv-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 100;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 1432px) {
+    .tv-header__inner {
+      padding: 0 16px;
+    }
+  }
+
+  /* ---- Logo ---- */
+  .tv-header__logo {
+    order: 1;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .tv-header__logo img {
+    display: block;
+    height: auto;
+  }
+
+  /* ---- Desktop Navigation ---- */
+  .tv-header__nav {
+    order: 2;
+    flex-grow: 8;
+    height: 100%;
+    background-color: #fff;
+  }
+
+  .tv-nav {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    margin: 0;
+    padding: 0 8px;
+    height: 100%;
+  }
+
+  .tv-nav__item {
+    margin: 0 16px 0 0;
+    position: relative;
+    display: inline-block;
+  }
+
+  .tv-nav__item:last-child {
+    margin-right: 0;
+  }
+
+  .tv-nav__link {
+    color: var(--tv-gray);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    height: var(--tv-header-height);
+    line-height: var(--tv-header-height);
+    padding: 0 12px;
+    transition: color 0.3s;
+    gap: 4px;
+    white-space: nowrap;
+  }
+
+  .tv-nav__item--parent .tv-nav__link {
+    padding-right: 20px;
+  }
+
+  .tv-nav__link:hover,
+  .tv-nav__link:focus {
+    color: var(--tv-dark);
+    text-decoration: none;
+  }
+
+  .tv-nav__caret {
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  /* ---- Dropdown submenu ---- */
+  .tv-nav__dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #fff;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.19);
+    min-width: 260px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+    font-weight: 500;
+  }
+
+  .tv-nav__item:hover > .tv-nav__dropdown {
+    display: block;
+  }
+
+  .tv-nav__item:hover > .tv-nav__link .tv-nav__caret {
+    transform: rotate(180deg);
+  }
+
+  /* Invisible bridge to prevent gap between link and dropdown */
+  .tv-nav__dropdown::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    left: 0;
+    top: -4px;
+    z-index: 1;
+  }
+
+  .tv-nav__dropdown-item {
+    margin: 0;
+    position: relative;
+  }
+
+  .tv-nav__dropdown-link {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 8px 20px;
+    color: var(--tv-light-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .tv-nav__dropdown-link span {
+    position: relative;
+  }
+
+  /* Underline animation on submenu links */
+  .tv-nav__dropdown-link span::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background-color: var(--tv-dark);
+    transition: width 0.3s;
+  }
+
+  .tv-nav__dropdown-link:hover {
+    color: var(--tv-dark);
+    background-color: #fff;
+    text-decoration: none;
+  }
+
+  .tv-nav__dropdown-link:hover span::after {
+    width: 100%;
+  }
+
+  /* ---- Search ---- */
+  .tv-header__search {
+    order: 3;
+    margin-right: 60px;
+    flex-shrink: 0;
+  }
+
+  .tv-search__form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 260px;
+  }
+
+  .tv-search__input {
+    width: 100%;
+    height: 36px;
+    border: 1px solid var(--tv-light-gray);
+    border-radius: 40px;
+    padding: 0 40px 0 15px;
+    font-size: 14px;
+    font-family: var(--tv-font-body);
+    color: var(--tv-medium-gray);
+    background: none;
+    outline: none;
+    text-transform: none;
+    transition: border-color 0.3s;
+  }
+
+  .tv-search__input::placeholder {
+    color: var(--tv-light-gray);
+    text-transform: none;
+  }
+
+  .tv-search__input:focus {
+    border-color: var(--tv-dark);
+  }
+
+  .tv-search__btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--tv-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease-out;
+  }
+
+  .tv-search__btn:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  /* ---- Cart button ---- */
+  .tv-header__cart {
+    order: 5;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 32px;
+    background: var(--tv-orange);
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+  }
+
+  .tv-header__cart:hover {
+    background: var(--tv-dark);
+  }
+
+  .tv-header__cart svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+  }
+
+  .tv-header__cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 20px;
+    background-color: var(--tv-red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: var(--tv-font-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    line-height: 1;
+    padding: 0 4px;
+  }
+
+  /* ---- Hamburger (mobile only) ---- */
+  .tv-header__toggle {
+    display: none;
+    order: 6;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--tv-dark);
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================
+     MOBILE DRAWER
+     ============================================ */
+  .tv-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .tv-drawer[aria-hidden='false'] {
+    pointer-events: auto;
+  }
+
+  .tv-drawer__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.3s;
+  }
+
+  .tv-drawer[aria-hidden='false'] .tv-drawer__overlay {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .tv-drawer__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 54px);
+    max-width: 380px;
+    height: 100%;
+    background: #fff;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15);
+    font-family: var(--tv-font);
+  }
+
+  .tv-drawer[aria-hidden='false'] .tv-drawer__panel {
+    transform: translateX(0);
+  }
+
+  .tv-drawer__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--tv-dark);
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .tv-drawer__menu {
+    list-style: none;
+    padding: 0;
+    margin: 40px 0 0;
+  }
+
+  .tv-drawer__item {
+    border-bottom: 1px solid var(--tv-border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .tv-drawer__link {
+    flex: 1;
+    display: block;
+    padding: 15px 0;
+    color: var(--tv-gray);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  .tv-drawer__link:hover {
+    color: var(--tv-dark);
+    text-decoration: none;
+  }
+
+  .tv-drawer__expand {
+    background: none;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    color: var(--tv-gray);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+  }
+
+  .tv-drawer__expand[aria-expanded='true'] {
+    transform: rotate(180deg);
+  }
+
+  .tv-drawer__submenu {
+    display: none;
+    width: 100%;
+    list-style: none;
+    padding: 0 0 10px 15px;
+    margin: 0;
+  }
+
+  .tv-drawer__sublink {
+    display: block;
+    padding: 10px 0;
+    color: var(--tv-light-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .tv-drawer__sublink:hover {
+    color: var(--tv-dark);
+    text-decoration: none;
+  }
+
+  .tv-drawer__account {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--tv-medium-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tv-drawer__account-link {
+    color: var(--tv-medium-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .tv-drawer__account-link:hover {
+    color: var(--tv-dark);
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media screen and (max-width: 767px) {
+    .tv-header__nav {
+      display: none;
+    }
+
+    .tv-header__search {
+      display: none;
+    }
+
+    .tv-header__toggle {
+      display: flex;
+    }
+
+    .tv-header__logo {
+      flex-grow: 1;
+    }
+
+    .tv-header__logo img {
+      width: 111px;
+    }
+
+    .tv-header__inner {
+      height: var(--tv-header-height);
+      padding: 0 15px;
+      padding-right: 15px;
+    }
+
+    .tv-header__cart {
+      margin-left: 12px;
+      order: 4;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .tv-drawer {
+      display: none !important;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Televes Header",
+  "class": "tv-header-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width (px)",
+      "min": 80,
+      "max": 300,
+      "step": 5,
+      "default": 170,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Search placeholder",
+      "default": "Search"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Televes Header"
+    }
+  ]
+}
+{% endschema %}
