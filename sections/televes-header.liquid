@@ -9,7 +9,7 @@
   assign menu = linklists[section.settings.menu]
 -%}
 
-<header class="tv-header" id="tv-header">
+<header class="tv-header" id="tv-header" style="--tv-logo-width: {{ logo_width }}px;">
   {%- comment -%} ====== MAIN HEADER BAR ====== {%- endcomment -%}
   <div class="tv-header__main">
     <div class="tv-header__inner">
@@ -311,6 +311,8 @@
 
   .tv-header__logo img {
     display: block;
+    width: var(--tv-logo-width, 170px);
+    max-width: var(--tv-logo-width, 170px);
     height: auto;
   }
 
@@ -741,6 +743,7 @@
 
     .tv-header__logo img {
       width: 111px;
+      max-width: 111px;
     }
 
     .tv-header__inner {
